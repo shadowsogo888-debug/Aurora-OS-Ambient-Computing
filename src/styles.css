@@ -1,0 +1,117 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted);
+  --color-card: var(--card);
+  --color-card-foreground: var(--foreground);
+  --color-border: var(--border);
+  --color-primary: var(--foreground);
+  --color-primary-foreground: var(--background);
+  --color-accent-mint: var(--accent-mint);
+  --color-accent-purple: var(--accent-purple);
+  --color-glass: var(--glass);
+  --color-glass-border: var(--glass-border);
+
+  --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --ease-spatial: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  --animate-aurora: aurora-drift 20s ease-in-out infinite;
+  --animate-float: panel-float 8s ease-in-out infinite;
+  --animate-reveal: reveal 1.2s var(--ease-spatial) both;
+
+  @keyframes aurora-drift {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+    33% { transform: translate(10%, 5%) scale(1.1); opacity: 0.6; }
+    66% { transform: translate(-5%, 15%) scale(0.9); opacity: 0.4; }
+  }
+  @keyframes panel-float {
+    0%, 100% { transform: translateY(0) rotateX(0deg); }
+    50% { transform: translateY(-12px) rotateX(1deg); }
+  }
+  @keyframes reveal {
+    from { opacity: 0; transform: translateY(20px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes bar-pulse {
+    0%, 100% { transform: scaleY(0.5); }
+    50% { transform: scaleY(1); }
+  }
+  --animate-bar: bar-pulse 1.8s ease-in-out infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  --animate-marquee: marquee 40s linear infinite;
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  --animate-shimmer: shimmer 3s linear infinite;
+
+  @keyframes scan {
+    0% { transform: translateY(-100%); opacity: 0; }
+    10%, 90% { opacity: 1; }
+    100% { transform: translateY(120%); opacity: 0; }
+  }
+  --animate-scan: scan 4s ease-in-out infinite;
+
+  @keyframes caret {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+  --animate-caret: caret 1s steps(2) infinite;
+
+  @keyframes grid-drift {
+    from { background-position: 0 0; }
+    to { background-position: 48px 48px; }
+  }
+  --animate-grid: grid-drift 20s linear infinite;
+}
+
+:root {
+  --radius: 0.875rem;
+  /* Deep blue-black */
+  --background: oklch(0.16 0.02 270);
+  --foreground: oklch(0.985 0 0);
+  --muted: oklch(0.68 0.02 265);
+  --card: oklch(0.20 0.02 270);
+  --border: oklch(1 0 0 / 8%);
+
+  --accent-mint: oklch(0.84 0.18 165);
+  --accent-purple: oklch(0.72 0.17 295);
+
+  --glass: oklch(1 0 0 / 3%);
+  --glass-border: oklch(1 0 0 / 8%);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html, body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-display);
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--accent-mint) 30%, transparent);
+    color: var(--foreground);
+  }
+}
